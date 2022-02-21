@@ -18,7 +18,7 @@ int get_square_size(int **sol_m, int row, int col)
         left = sol[row][col - 1];
         up = sol[row - 1][col];
         diagonal = sol[row - 1][col - 1];
-        return (min(left, diagonal, up));
+        return (min(left, diagonal, up) + 1);
     }
 }
 
