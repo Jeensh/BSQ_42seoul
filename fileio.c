@@ -22,6 +22,21 @@ char *open_file(char *filename, int *fd)	// 파일 열어서 모든 내용 읽�
 	if (fd < 0)
 		return (0);
 	buf = (char *)malloc(sizeof(char) * BUF_SIZE);
+	if (!buf)
+		return (0);
 	read(*fd, buf, BUF_SIZE);
 	return (buf);
 }
+
+int skip_first_fline(char *buf)				// 두 번째 라인 첫 문자 인덱스를 반환
+{
+	int	i;
+
+	i = 0;
+	while (buf[i] && (buf[i] != '\n'))		// 첫 행 건너 뛰기
+		i++;
+	i++;
+	return (i);
+}
+
+

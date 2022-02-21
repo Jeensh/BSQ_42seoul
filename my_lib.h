@@ -26,15 +26,29 @@ typedef struct s_map_opt{
 	int		col_size;
 } opt;
 
-char	**get_solution(char *filename);									// sol
-
 void	print_result(char **result);									// my_print
 
-char	*open_file(char *filename, int *fd);							// fileio		
+int 	get_min(int a, int b, int c);									// math
 
-void	set_len_chars(struct opt *c);									// matrix
-char	**make_char_matrix(char *filename);
-char	**make_original_matrix(int fd, char *filename);
+char	*open_file(char *filename, int *fd);							// fileio		
+int		skip_first_fline(char *buf)
+
+void 	set_col(char *buf, struct opt *c);								// matrix
+void	set_opt(char *buf, struct opt *c);
+char 	**make_int_matrix(struct opt *c);
+char	**make_char_matrix(struct opt *c);
+int		change_c2i(struct opt *c, char target);
+char	**make_original_matrix(int fd, char *filename, int *fd);
+char	**make_basic_matrix(struct opt *c, char **original_matrix)
+void	make_two_matrix(char *filename, int *fd, char **ori_m, char **sol_m);
+void	free_char_matrix(char **char_m, struct opt *c);
+void	free_int_matrix(int **int_m, struct opt *c);
+
+int 	get_square_size(int **sol_m, int row, int col);					// solving
+char    **make_solution_matrix(int **basic_matrix, struct opt *c);
+int 	find_biggest_sqare(int **sol_m, struct opt *c, int *row, int *col);
+char    **turn_original2answer(int **sol_m, char **ori_m, struct opt *c);
+void    get_solution(char *filename);
 
 int	check_sign(char *str);												// atoi
 int	get_num(char *str);

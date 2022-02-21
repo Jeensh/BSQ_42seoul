@@ -14,7 +14,6 @@
 int main(int argc, char *argv[])
 {
 	int i;
-	char **result;
 
 	if (argc == 1)			// 문자열 인자가 없는 경우- 미완
 	{
@@ -22,14 +21,12 @@ int main(int argc, char *argv[])
 	}
 	else					// 문자열 인자가 있는 경우
 	{
-		i = 1;
-		while (i < argc)
+		i = -1;
+		while (++i < argc)
 		{
-			result = get_solution(argv[i])
-			print_result(result);
+			get_solution(argv[i]);
 			if (i != (argc -1))
 				write(1, "\n", 1);
-			i++;
 		}
 	}
 	return (0);

@@ -12,25 +12,23 @@
 
 #include "my_lib.h"
 
-void set_col(char *buf, struct opt *c)
+void	set_col(char *buf, struct opt *c)
 {
 	int i;
 	int size;
 
 	i = 0;
 	size = 0;
-	while (buf[i] && (buf[i] != '\n'))				// 첫 행 건너 뛰기
-		i++;
-	i++;
+	i = skip_first_fline(buf);
 	while (buf[i] && (buf[i] != '\n'))				// 한 줄의 길이 세기(열 크기 세기)
 	{
 		i++;
 		size++;
 	}
-	c->col_size = 
+	c->col_size = size;
 }
 
-void set_row_chars(char *buf, struct opt *c)		// 첫 행 검사하는 함수 필요
+void	set_opt(char *buf, struct opt *c)		// 첫 행 검사하는 함수 필요
 {
 	char	*opt_line[100];
 	int		i;
@@ -49,24 +47,139 @@ void set_row_chars(char *buf, struct opt *c)		// 첫 행 검사하는 함수 필
 	c->empty_c = opt_line[i];
 	c->hurdle_c = opt_line[++i];
 	c->fill_c = opt_line[++i];
+	set_col(buf, c);
 }
 
-char **make_char_matrix(char *buf)
+char	**make_char_matrix(struct opt *c)
 {
-	int			col_size;
-	int			row_size;
+	char		**char_matrix;
+	int			i;
+
+	char_matrix = (char **)malloc(sizeof(char *) * (c->row_size + 1);		// 마지막 행은 NULL포인터
+	if (!char_matrix)
+		return (0);
+	char_matrix[c->row_size] = 0;
+	i = -1;
+	while (++i < c->row_size)
+	{
+		char_matrix[i] = (char *)malloc(sizeof(char) * (c->col_size + 1))	// 마지막 열(문자)은 '\0'
+		if (!char_matrix[i])
+		{
+			free_char_matrix(char_matrix);
+			return (0);
+		}
+	}
+	i = -1;
+	while (++i < c->row_size)
+		char_matrix[i][col_size] = '\0';
+	return (char_matrix);	
+}
+
+char	**make_int_matrix(char *buf, struct opt *c)
+{
+	int	**int_matrix;
+	int	i;
+
+	int_matrix = (int **)malloc(sizeof(int *) * (c->row_size + 1);		// 마지막 행은 NULL포인터
+	if (!int_matrix)
+		return (0);
+	int_matrix[c->row_size] = 0;
+	i = -1;
+	while (++i < c->row_size)
+	{
+		int_matrix[i] = (int *)malloc(sizeof(int) * (c->col_size + 1))	// 마지막 열(정수)는 -1
+		if (!int_matrix[i])
+		{
+			free_int_matrix(int_matrix);
+			return (0);
+		}
+	}
+	i = -1;
+	while (++i < c->row_size)
+		int_matrix[i][col_size] = -1;
+	return (int_matrix);		
+}
+
+int	change_c2i(struct opt *c, char target)								// 문자를 옵션에 따라 해당하는 숫자로 바꿔주기
+{
+	if (target == c->hurdle_c)
+		return (0);
+	else if (target == c->empty_c)
+		return (1);
+	else
+		return (-1);
+}
+
+char	**make_origianl_matrix(struct opt *c, char *buf)
+{
+	char		**original_matrix;
+	int			row;
+	int			col;
+	int			buf_i;
+
+	original_matrix = make_char_matrix(c);
+	row = -1;
+	col = -1;
+	buf_i = skip_first_fline(buf);
+	while (++row < c->row_size)
+	{
+		col = -1;
+		while (++col < c->col_size)
+			original_matrix[row][col] = buf[buf_i++];
+		buf_i++;															// 줄바꿈 문자 건너가기
+	}
+	return (original_matrix);
+}
+
+char	**make_basic_matrix(struct opt *c, char **original_matrix)
+{
+	char	**basic_matrix;
+	int		row;
+	int		col;
+
+	basic_matrix = make_int_matrix(c);
+	row = -1;
+	col = -1;
+	while (++row < c->row_size)
+	{
+		col = -1;
+		while (++col < c->col_size)
+			basic_matrix[col][row] = change_c2i(c, original_matrix[row][col])
+	}
+	return (basic_matrix);
+}
+
+struct opt	*make_two_matrix(char *filename, int *fd, char **ori_m, char **basic_m)
+{
+	char		*buf;
 	struct opt	*c;
 	
-	set_row_chars(buf, c);
+	c = (struct opt *)malloc(sizeof(struct opt));
+	if (!c)
+		return (0);
+	buf = open_file(filename, fd);											// 파일에서 내용 전부 가져오기
+	set_opt(buf, c);														// 파일 첫줄 이용해서 옵션 세팅
+	ori_m = make_origianl_matrix(c, buf);
+	basic_m = make_basic_matrix(c, ori_m);
+	return (c);
 }
 
-char **make_origianl_matrix(char *filename)
+void	free_char_matrix(char **char_m, struct opt *c)
 {
-	int fd;
-	char *buf;
-	
-	fd = 0;
-	buf = open_file(filename, &fd);
-	
-	
+	int row;
+
+	row = -1;
+	while (char_m[++row])
+		free(char_m[row]);
+	free(char_m);
+}
+
+void	free_int_matrix(int **int_m, struct opt *c)
+{
+	int row;
+
+	row = -1;
+	while (int_m[++row])
+		free(int_m[row]);
+	free(int_m);
 }
