@@ -30,23 +30,27 @@ void	set_col(char *buf, opt *c)
 
 void	set_opt(char *buf, opt *c)		// 첫 행 검사하는 함수 필요
 {
-	char	opt_line[100];
+	char	opt_row[100];
+	char	opt_c[4];
 	int		i;
+	int		j;
 
 	i = 0;
-	while (buf[i]  && (buf[i] != '\n'))				// 첫 행만 가져오기
-	{
-		opt_line[i] = buf[i];
+	j = 0;
+	opt_c[3] = '\0';
+	while (buf[i]  && (buf[i] != '\n'))
 		i++;
-	}
-	opt_line[i] = '\0';
-	c->row_size = ft_atoi(opt_line);						// 행 개수 세팅
-	i = 0;
-	while (opt_line[i] && (opt_line[i] >= '0' && opt_line[i] <= '9'))
-		i++;
-	c->empty_c = opt_line[i];
-	c->hurdle_c = opt_line[++i];
-	c->fill_c = opt_line[++i];
+	opt_c[2] = buf[--i];
+	opt_c[1] = buf[--i];
+	opt_c[0] = buf[--i];
+	j = -1;
+	while (++j < i)
+		opt_row[j] = buf[j];
+	opt_row[++j] = '\0';
+	c->row_size = ft_atoi(opt_row);						// 행 개수 세팅
+	c->empty_c = opt_c[0];
+	c->hurdle_c = opt_c[1];
+	c->fill_c = opt_c[2];
 	set_col(buf, c);
 }
 
