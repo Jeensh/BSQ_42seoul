@@ -14,14 +14,14 @@
 int main(int argc, char *argv[])
 {
 	int i;
-
+	
 	if (argc == 1)			// 문자열 인자가 없는 경우- 미완
 	{
 		
 	}
 	else					// 문자열 인자가 있는 경우
 	{
-		i = -1;
+		i = 0;
 		while (++i < argc)
 		{
 			get_solution(argv[i]);
@@ -29,5 +29,6 @@ int main(int argc, char *argv[])
 				write(1, "\n", 1);
 		}
 	}
+	system("leaks bsq");
 	return (0);
 }

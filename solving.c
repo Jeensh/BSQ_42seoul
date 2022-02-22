@@ -18,9 +18,11 @@ int get_square_size(int **sol_m, int row, int col)
     int diagonal;
     int up;
 
-    if (sol_m[row][col] == 0)
+    if (sol_m[row][col] == 0) 
+    {
         return (0);
-    else if (row == 1 || col == 1)
+    }
+    else if (row == 0 || col == 0)
     {
         return (1);
     }
@@ -40,6 +42,7 @@ int    **make_solution_matrix(int **basic_matrix, opt *c)
 
     row = -1;
     col = -1;
+
     while (++row < c->row_size)
     {
         col = -1;
@@ -113,17 +116,11 @@ void    get_solution(char *filename)
 
 	sol_m = 0;
 	ori_m = 0;
-    c = make_two_matrix(filename, &fd, ori_m, sol_m);
+    c = make_two_matrix(filename, &fd, &ori_m, &sol_m);
     sol_m = make_solution_matrix(sol_m, c);
     ori_m = turn_original2answer(sol_m, ori_m, c);
-	printf("4\n");
-	print_result(ori_m, c);
     free_int_matrix(sol_m, c);
-	printf("5\n");
     print_result(ori_m, c);
-	printf("6\n");
     free_char_matrix(ori_m, c);
-	printf("7\n");
     free(c);
-	printf("8\n");
 }

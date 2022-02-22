@@ -39,8 +39,8 @@ void	set_opt(char *buf, opt *c)		// 첫 행 검사하는 함수 필요
 		opt_line[i] = buf[i];
 		i++;
 	}
-	buf[i] = '\0';
-	c->row_size = ft_atoi(buf);						// 행 개수 세팅
+	opt_line[i] = '\0';
+	c->row_size = ft_atoi(opt_line);						// 행 개수 세팅
 	i = 0;
 	while (opt_line[i] && (opt_line[i] >= '0' && opt_line[i] <= '9'))
 		i++;
@@ -144,12 +144,12 @@ int	**make_basic_matrix(opt *c, char **original_matrix)
 	{
 		col = -1;
 		while (++col < c->col_size)
-			basic_matrix[col][row] = change_c2i(c, original_matrix[row][col]);
+			basic_matrix[row][col] = change_c2i(c, original_matrix[row][col]);
 	}
 	return (basic_matrix);
 }
 
-opt	*make_two_matrix(char *filename, int *fd, char **ori_m, int **basic_m)
+opt	*make_two_matrix(char *filename, int *fd, char ***ori_m, int ***basic_m)
 {
 	char		*buf;
 	opt	*c;
@@ -159,8 +159,9 @@ opt	*make_two_matrix(char *filename, int *fd, char **ori_m, int **basic_m)
 		return (0);
 	buf = open_file(filename, fd);											// 파일에서 내용 전부 가져오기
 	set_opt(buf, c);														// 파일 첫줄 이용해서 옵션 세팅
-	ori_m = make_origianl_matrix(c, buf);
-	basic_m = make_basic_matrix(c, ori_m);
+	*ori_m = make_origianl_matrix(c, buf);
+	*basic_m = make_basic_matrix(c, *ori_m);
+	free(buf);
 	return (c);
 }
 

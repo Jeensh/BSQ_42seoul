@@ -41,7 +41,7 @@ char	**make_char_matrix(opt *c);
 int		change_c2i(opt *c, char target);
 char	**make_original_matrix(opt *c, char *buf);
 int		**make_basic_matrix(opt *c, char **original_matrix);
-opt		*make_two_matrix(char *filename, int *fd, char **ori_m, int **sol_m);
+opt		*make_two_matrix(char *filename, int *fd, char ***ori_m, int ***sol_m);
 void	free_char_matrix(char **char_m, opt *c);
 void	free_int_matrix(int **int_m, opt *c);
 
