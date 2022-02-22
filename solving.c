@@ -6,7 +6,7 @@
 /*   By: donghshi <donghshi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:12:19 by donghshi          #+#    #+#             */
-/*   Updated: 2022/02/22 10:13:07 by donghshi         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:17:34 by donghshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int get_square_size(int **sol_m, int row, int col)
     }
     else
     {
-        left = sol[row][col - 1];
-        up = sol[row - 1][col];
-        diagonal = sol[row - 1][col - 1];
-        return (min(left, diagonal, up) + 1);
+        left = sol_m[row][col - 1];
+        up = sol_m[row - 1][col];
+        diagonal = sol_m[row - 1][col - 1];
+        return (get_min(left, diagonal, up) + 1);
     }
 }
 
-char    **make_solution_matrix(int **basic_matrix, struct opt *c)
+int    **make_solution_matrix(int **basic_matrix, opt *c)
 {
     int row;
     int col;
@@ -51,7 +51,7 @@ char    **make_solution_matrix(int **basic_matrix, struct opt *c)
     return (basic_matrix);
 }
 
-int find_biggest_sqare(int **sol_m, struct opt *c, int *row, int *col)
+int find_biggest_sqare(int **sol_m, opt *c, int *row, int *col)
 {
     int i;
     int j;
@@ -76,7 +76,7 @@ int find_biggest_sqare(int **sol_m, struct opt *c, int *row, int *col)
     return (max);
 }
 
-char    **turn_original2answer(int **sol_m, char **ori_m, struct opt *c)
+char    **turn_original2answer(int **sol_m, char **ori_m, opt *c)
 {
     int row;
     int col;
@@ -106,16 +106,24 @@ char    **turn_original2answer(int **sol_m, char **ori_m, struct opt *c)
 
 void    get_solution(char *filename)
 {
-    struct opt  *c;
+    opt  *c;
     int         fd;
     int         **sol_m;
     char        **ori_m;
 
+	sol_m = 0;
+	ori_m = 0;
     c = make_two_matrix(filename, &fd, ori_m, sol_m);
     sol_m = make_solution_matrix(sol_m, c);
     ori_m = turn_original2answer(sol_m, ori_m, c);
+	printf("4\n");
+	print_result(ori_m, c);
     free_int_matrix(sol_m, c);
-    print_result(ori_m);
+	printf("5\n");
+    print_result(ori_m, c);
+	printf("6\n");
     free_char_matrix(ori_m, c);
+	printf("7\n");
     free(c);
+	printf("8\n");
 }
