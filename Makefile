@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = bsq
 OBJS = $(SRCS:.c=.o)
-SRCS = ft_atoi.c math.c fileio.c my_print.c matrix.c solving.c main.c
+SRCS = ft_atoi.c math.c fileio.c std.c my_print.c matrix.c solving.c main.c
 
 all : $(NAME)
 

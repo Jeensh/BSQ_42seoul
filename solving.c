@@ -109,7 +109,7 @@ char    **turn_original2answer(int **sol_m, char **ori_m, opt *c)
 
 void    get_solution(char *filename)
 {
-    opt  *c;
+    opt         *c;
     int         fd;
     int         **sol_m;
     char        **ori_m;
@@ -119,8 +119,27 @@ void    get_solution(char *filename)
     c = make_two_matrix(filename, &fd, &ori_m, &sol_m);
     sol_m = make_solution_matrix(sol_m, c);
     ori_m = turn_original2answer(sol_m, ori_m, c);
-    free_int_matrix(sol_m, c);
     print_result(ori_m, c);
+    free_int_matrix(sol_m, c);
+    free_char_matrix(ori_m, c);
+    free(c);
+    close(fd);
+}
+
+void    get_std_solution(char *buf)
+{
+    opt         *c;
+    int         **sol_m;
+    char        **ori_m;
+
+	sol_m = 0;
+	ori_m = 0;
+    c = make_two_matrix_std(buf, &ori_m, &sol_m);
+    sol_m = make_solution_matrix(sol_m, c);
+    ori_m = turn_original2answer(sol_m, ori_m, c);
+    write(1, "\n", 1);                                            // 표준입력으로 받을 때 출력 확인 필요
+    print_result(ori_m, c);
+    free_int_matrix(sol_m, c);
     free_char_matrix(ori_m, c);
     free(c);
 }

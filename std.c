@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   std.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghshi <donghshi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 10:14:55 by donghshi          #+#    #+#             */
-/*   Updated: 2022/02/22 12:22:31 by donghshi         ###   ########.fr       */
+/*   Created: 2022/02/22 16:56:36 by donghshi          #+#    #+#             */
+/*   Updated: 2022/02/22 16:56:44 by donghshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "my_lib.h"
 
-int main(int argc, char *argv[])
+char *get_standard_input(void)
 {
-	int i;
-	
-	if (argc == 1)			// 문자열 인자가 없는 경우- 미완
-	{
-		get_std_solution(get_standard_input());
-	}
-	else					// 문자열 인자가 있는 경우
-	{
-		i = 0;
-		while (++i < argc)
-		{
-			get_solution(argv[i]);
-			if (i != (argc -1))
-				write(1, "\n", 1);
-		}
-	}
-	system("leaks bsq");
-	return (0);
+	int     fd;
+	int     i;
+	char    c;
+	char    *buf;
+
+    fd = 0;
+    i = 0;
+    buf = (char *)malloc(sizeof(char) * BUF_SIZE);
+    if (!buf)
+        return (0);
+	while (read(fd, &c, 1))
+		buf[i++] = c;
+	buf[i] = '\0';
+	return (buf);
 }

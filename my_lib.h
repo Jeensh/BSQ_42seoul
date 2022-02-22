@@ -27,9 +27,11 @@ typedef struct s_map_opt{
 	int		col_size;
 } opt;
 
-void	print_result(char **result, opt *c);									// my_print
+void	print_result(char **result, opt *c);							// my_print
 
 int 	get_min(int a, int b, int c);									// math
+
+char 	*get_standard_input(void);										// std
 
 char	*open_file(char *filename, int *fd);							// fileio		
 int		skip_first_fline(char *buf);
@@ -42,6 +44,7 @@ int		change_c2i(opt *c, char target);
 char	**make_original_matrix(opt *c, char *buf);
 int		**make_basic_matrix(opt *c, char **original_matrix);
 opt		*make_two_matrix(char *filename, int *fd, char ***ori_m, int ***sol_m);
+opt		*make_two_matrix_std(char *buf, char ***ori_m, int ***basic_m);
 void	free_char_matrix(char **char_m, opt *c);
 void	free_int_matrix(int **int_m, opt *c);
 
@@ -50,6 +53,7 @@ int		**make_solution_matrix(int **basic_matrix, opt *c);
 int 	find_biggest_sqare(int **sol_m, opt *c, int *row, int *col);
 char    **turn_original2answer(int **sol_m, char **ori_m, opt *c);
 void    get_solution(char *filename);
+void    get_std_solution(char *buf);
 
 int	check_sign(char *str);												// atoi
 int	get_num(char *str);

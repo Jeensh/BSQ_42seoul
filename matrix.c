@@ -169,6 +169,20 @@ opt	*make_two_matrix(char *filename, int *fd, char ***ori_m, int ***basic_m)
 	return (c);
 }
 
+opt	*make_two_matrix_std(char *buf, char ***ori_m, int ***basic_m)
+{
+	opt	*c;
+	
+	c = (opt *)malloc(sizeof(opt));
+	if (!c)
+		return (0);
+	set_opt(buf, c);														// 파일 첫줄 이용해서 옵션 세팅
+	*ori_m = make_origianl_matrix(c, buf);
+	*basic_m = make_basic_matrix(c, *ori_m);
+	free(buf);
+	return (c);
+}
+
 void	free_char_matrix(char **char_m, opt *c)
 {
 	int row;
