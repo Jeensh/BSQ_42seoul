@@ -27,7 +27,10 @@ typedef struct t_map_t_opt{
 }	t_opt;
 
 void	print_result(char **result, t_opt *c);
+void	print_error(void);
+
 int		get_min(int a, int b, int c);
+
 char	*get_standard_input(void);
 
 char	*open_file(char *filename, int *fd);
@@ -40,7 +43,7 @@ char	**make_char_matrix(t_opt *c);
 int		change_c2i(t_opt *c, char target);
 char	**make_original_matrix(t_opt *c, char *buf);
 int		**make_basic_matrix(t_opt *c, char **original_matrix);
-t_opt	*make_two_matrix(char *filename, int *fd, char ***ori_m, int ***sol_m);
+t_opt	*make_two_matrix(char *buf, char ***ori_m, int ***sol_m);
 t_opt	*make_two_matrix_std(char *buf, char ***ori_m, int ***basic_m);
 void	free_char_matrix(char **char_m, t_opt *c);
 void	free_int_matrix(int **int_m, t_opt *c);
@@ -55,5 +58,13 @@ void	get_std_solution(char *buf);
 int		check_sign(char *str);
 int		get_num(char *str);
 int		ft_atoi(char *str);
+
+int 	check_char(t_opt *c);
+int 	check_row_size(char *num);
+int 	check_firstline(char *buf, t_opt *c);
+int 	check_col_size(char *buf, t_opt *c);
+int 	check_map_char(t_opt *c, char target);
+int 	check_map(char *buf, t_opt *c);
+int 	check_all(char *buf);
 
 #endif

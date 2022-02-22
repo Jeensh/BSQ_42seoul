@@ -29,3 +29,8 @@ void	print_result(char **result, t_opt *c)
 		write(1, "\n", 1);
 	}
 }
+
+void	print_error(void)
+{
+	write(1, "map error\n", 10);
+}

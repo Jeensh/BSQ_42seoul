@@ -14,10 +14,17 @@
 int	main(int argc, char *argv[])
 {
 	int	i;
+	char *buf;
 
 	if (argc == 1)
 	{
-		get_std_solution(get_standard_input());
+		buf = get_standard_input();
+		if (check_all(buf) == 0)
+		{
+			print_error();
+			return (0);
+		}
+		get_std_solution(buf);
 	}
 	else
 	{

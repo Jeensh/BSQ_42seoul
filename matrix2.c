@@ -51,19 +51,16 @@ int	**make_basic_matrix(t_opt *c, char **original_matrix)
 	return (basic_matrix);
 }
 
-t_opt	*make_two_matrix(char *filename, int *fd, char ***ori_m, int ***basic_m)
+t_opt	*make_two_matrix(char *buf, char ***ori_m, int ***basic_m)
 {
-	char	*buf;
 	t_opt	*c;
 
 	c = (t_opt *)malloc(sizeof(t_opt));
 	if (!c)
 		return (0);
-	buf = open_file(filename, fd);
 	set_opt(buf, c);
 	*ori_m = make_origianl_matrix(c, buf);
 	*basic_m = make_basic_matrix(c, *ori_m);
-	free(buf);
 	return (c);
 }
 
