@@ -23,7 +23,6 @@ void	get_std_solution(char *buf)
 	c = make_two_matrix_std(buf, &ori_m, &sol_m);
 	sol_m = make_solution_matrix(sol_m, c);
 	ori_m = turn_original2answer(sol_m, ori_m, c);
-	write(1, "\n", 1);
 	print_result(ori_m, c);
 	free_int_matrix(sol_m, c);
 	free_char_matrix(ori_m, c);

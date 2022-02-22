@@ -124,7 +124,7 @@ int check_all(char *buf)                        // 지도 파일이 유효한지
     int i;
 
     i = 0;
-    while (i < 10)                              // 이거 안해주면 제대로 실행이 안됨
+    while (i < 100)                              // 이거 안해주면 제대로 실행이 안됨
         i++;                                    // 이유를 잘 모르겠음
     if (!check_firstline(buf, &c))
         return (0);

@@ -13,7 +13,7 @@
 #ifndef MY_LIB_H
 # define MY_LIB_H
 
-# define BUF_SIZE 20000000
+# define BUF_SIZE 200000000
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
