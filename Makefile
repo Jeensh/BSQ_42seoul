@@ -6,7 +6,7 @@
 #    By: donghshi <donghshi@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/22 11:50:08 by donghshi          #+#    #+#              #
-#    Updated: 2022/02/22 11:52:24 by donghshi         ###   ########.fr        #
+#    Updated: 2022/02/22 18:59:24 by donghshi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = bsq
 OBJS = $(SRCS:.c=.o)
-SRCS = ft_atoi.c math.c fileio.c std.c my_print.c matrix.c solving.c main.c
+SRCS = ft_atoi.c math.c fileio.c std.c my_print.c matrix.c matrix2.c matrix3.c solving.c solving2.c main.c
 
 all : $(NAME)
 

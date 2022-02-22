@@ -6,14 +6,14 @@
 /*   By: donghshi <donghshi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 12:36:19 by donghshi          #+#    #+#             */
-/*   Updated: 2022/02/22 11:56:41 by donghshi         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:44:39 by donghshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_lib.h"
 
 #include <stdio.h>
 
-char *open_file(char *filename, int *fd)	// 파일 열어서 모든 내용 읽어서 반환, malloc으로 할당함(free처리필요)
+char	*open_file(char *filename, int *fd)
 {
 	char	*buf;
 
@@ -27,15 +27,13 @@ char *open_file(char *filename, int *fd)	// 파일 열어서 모든 내용 읽�
 	return (buf);
 }
 
-int skip_first_fline(char *buf)				// 두 번째 라인 첫 문자 인덱스를 반환
+int	skip_first_fline(char *buf)
 {
 	int	i;
 
 	i = 0;
-	while (buf[i] && (buf[i] != '\n'))		// 첫 행 건너 뛰기
+	while (buf[i] && (buf[i] != '\n'))
 		i++;
 	i++;
 	return (i);
 }
-
-
