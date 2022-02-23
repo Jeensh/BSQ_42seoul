@@ -6,15 +6,15 @@
 /*   By: donghshi <donghshi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 10:14:55 by donghshi          #+#    #+#             */
-/*   Updated: 2022/02/22 19:39:29 by donghshi         ###   ########.fr       */
+/*   Updated: 2022/02/23 09:45:42 by donghshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "my_lib.h"
 
 int	main(int argc, char *argv[])
 {
-	int	i;
-	char *buf;
+	int		i;
+	char	*buf;
 
 	if (argc == 1)
 	{

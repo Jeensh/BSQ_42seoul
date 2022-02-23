@@ -6,7 +6,7 @@
 /*   By: donghshi <donghshi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 12:29:51 by donghshi          #+#    #+#             */
-/*   Updated: 2022/02/22 19:17:33 by donghshi         ###   ########.fr       */
+/*   Updated: 2022/02/23 09:58:59 by donghshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>			// test
 
 typedef struct t_map_t_opt{
 	char	hurdle_c;
@@ -59,12 +60,13 @@ int		check_sign(char *str);
 int		get_num(char *str);
 int		ft_atoi(char *str);
 
-int 	check_char(t_opt *c);
-int 	check_row_size(char *num);
-int 	check_firstline(char *buf, t_opt *c);
-int 	check_col_size(char *buf, t_opt *c);
-int 	check_map_char(t_opt *c, char target);
-int 	check_map(char *buf, t_opt *c);
-int 	check_all(char *buf);
+int		check_char(t_opt *c);
+int		check_row_size(char *num);
+int		check_firstline(char *buf, t_opt *c);
+int		check_col_size(char *buf, t_opt *c);
+int		check_map_char(t_opt *c, char target);
+int		check_if_newline(int *row_size, int *col_size, t_opt *c);
+int		check_map(char *buf, t_opt *c);
+int		check_all(char *buf);
 
 #endif

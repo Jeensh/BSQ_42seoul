@@ -6,7 +6,7 @@
 /*   By: donghshi <donghshi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 10:12:19 by donghshi          #+#    #+#             */
-/*   Updated: 2022/02/22 18:58:25 by donghshi         ###   ########.fr       */
+/*   Updated: 2022/02/23 09:45:09 by donghshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	get_solution(char *filename)
 	{
 		print_error();
 		free(buf);
-		return;
+		return ;
 	}
 	c = make_two_matrix(buf, &ori_m, &sol_m);
 	sol_m = make_solution_matrix(sol_m, c);
