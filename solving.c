@@ -108,15 +108,18 @@ char	**turn_original2answer(int **sol_m, char **ori_m, t_opt *c)
 void	get_solution(char *filename)
 {
 	t_opt	*c;
-	int		fd;
 	int		**sol_m;
 	char	**ori_m;
 	char	*buf;
 
 	sol_m = 0;
 	ori_m = 0;
-	fd = -1;
-	buf = open_file(filename, &fd);
+	buf = open_file(filename);
+	if (!buf)
+	{
+		print_error();
+		return ;
+	}
 	if (check_all(buf) == 0)
 	{
 		print_error();
@@ -127,9 +130,5 @@ void	get_solution(char *filename)
 	sol_m = make_solution_matrix(sol_m, c);
 	ori_m = turn_original2answer(sol_m, ori_m, c);
 	print_result(ori_m, c);
-	free(buf);
-	free_int_matrix(sol_m, c);
-	free_char_matrix(ori_m, c);
-	free(c);
-	close(fd);
+	free_all(buf, sol_m, ori_m, c);
 }

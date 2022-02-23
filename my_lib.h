@@ -13,7 +13,7 @@
 #ifndef MY_LIB_H
 # define MY_LIB_H
 
-# define BUF_SIZE 200000000
+# define BUF_SIZE 120000000
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -34,7 +34,7 @@ int		get_min(int a, int b, int c);
 
 char	*get_standard_input(void);
 
-char	*open_file(char *filename, int *fd);
+char	*open_file(char *filename);
 int		skip_first_fline(char *buf);
 
 void	set_col(char *buf, t_opt *c);
@@ -55,6 +55,7 @@ int		find_biggest_sqare(int **sol_m, t_opt *c, int *row, int *col);
 char	**turn_original2answer(int **sol_m, char **ori_m, t_opt *c);
 void	get_solution(char *filename);
 void	get_std_solution(char *buf);
+void	free_all(char *buf, int **s_m, char **o_m, t_opt *c);
 
 int		check_sign(char *str);
 int		get_num(char *str);

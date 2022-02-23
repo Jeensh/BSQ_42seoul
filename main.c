@@ -32,8 +32,9 @@ int	main(int argc, char *argv[])
 		while (++i < argc)
 		{
 			get_solution(argv[i]);
+			if (i != argc - 1)
+				write(1, "\n", 1);
 		}
 	}
-//	system("leaks bsq");
 	return (0);
 }

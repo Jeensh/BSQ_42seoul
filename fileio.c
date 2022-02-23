@@ -13,17 +13,23 @@
 
 #include <stdio.h>
 
-char	*open_file(char *filename, int *fd)
+char	*open_file(char *filename)
 {
 	char	*buf;
+	int		size;
+	int		fd;
 
-	*fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	buf = (char *)malloc(sizeof(char) * BUF_SIZE);
 	if (!buf)
 		return (0);
-	read(*fd, buf, BUF_SIZE);
+	size = read(fd, buf, BUF_SIZE);
+	close(fd);
+	if (size <= 0)
+		return (0);
+	buf[size] = '\0';
 	return (buf);
 }
 

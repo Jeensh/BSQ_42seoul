@@ -12,6 +12,14 @@
 
 #include "my_lib.h"
 
+void	free_all(char *buf, int **s_m, char **o_m, t_opt *c)
+{
+	free(buf);
+	free_int_matrix(s_m, c);
+	free_char_matrix(o_m, c);
+	free(c);
+}
+
 void	get_std_solution(char *buf)
 {
 	t_opt	*c;
